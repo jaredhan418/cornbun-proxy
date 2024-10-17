@@ -6,5 +6,8 @@ import (
 )
  
 func Handler(w http.ResponseWriter, r *http.Request) {
-  fmt.Fprintf(w, "<h5>Alive!</h5>")
+  params := r.URL.Query();
+	vin := params.Get("vin")
+
+  fmt.Fprintf(w, vin)
 }
