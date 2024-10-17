@@ -1,8 +1,7 @@
-package main
+package vehicle
 
 import (
 	"context"
-	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -12,27 +11,20 @@ import (
 	"github.com/teslamotors/vehicle-command/pkg/protocol"
 )
 
-func main() {
+func Unlock(vin string, token string) {
+	unlock(vin, token)
+}
+
+func unlock(vin string, oauthToken string) {
 	logger := log.New(os.Stderr, "", 0)
 	status := 1 // Exit code
 	defer func() {
 		os.Exit(status)
 	}()
 
-	// The variables below are initialized from the command-line interface.
-	var (
-		privateKeyFile string
-		vin            string
-		tokenFilename  string
-	)
-	flag.StringVar(&privateKeyFile, "key", "private.key", "Private key `file` for authorizing commands (NIST-P256)")
-	flag.StringVar(&vin, "vin", "", "Vehicle Identification Number (`VIN`) of the car")
-	flag.StringVar(&tokenFilename, "token", "", "Load OAuth token from `file`")
-	flag.Parse()
-
 	// Specify the user-agent header value used in HTTP requests to Tesla's servers. The default
 	// value is constructed from your package name and account.LibraryVersion.
-	userAgent := "example-unlock/1.0.0"
+	userAgent := "cornbun.fun/1.0.0"
 
 	if vin == "" {
 		logger.Printf("Must specify VIN")
@@ -42,13 +34,12 @@ func main() {
 	// Since commands are authenticated end-to-end, they need to be authorized with a private key.
 	// The corresponding public key must be enrolled on the vehicle's keychain. See the README.md
 	// file in the root directory for pointers on setting all this up.
-	privateKey, err := protocol.LoadPrivateKey(privateKeyFile)
+	privateKey, err := protocol.LoadPrivateKey("private.pem")
 	if err != nil {
 		logger.Printf("Failed to load private key: %s", err)
 		return
 	}
 
-	oauthToken, err := os.ReadFile(tokenFilename)
 	if err != nil {
 		logger.Printf("Failed to load OAuth token: %s", err)
 		return
