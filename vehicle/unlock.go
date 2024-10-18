@@ -11,11 +11,11 @@ import (
 	"github.com/teslamotors/vehicle-command/pkg/protocol"
 )
 
-func Unlock(vin string, token string) {
-	unlock(vin, token)
+func Unlock(vin string, token string, keyPath string) {
+	unlock(vin, token, keyPath)
 }
 
-func unlock(vin string, oauthToken string) {
+func unlock(vin string, oauthToken string, keyPath string) {
 	logger := log.New(os.Stderr, "", 0)
 	status := 1 // Exit code
 	defer func() {
@@ -34,7 +34,7 @@ func unlock(vin string, oauthToken string) {
 	// Since commands are authenticated end-to-end, they need to be authorized with a private key.
 	// The corresponding public key must be enrolled on the vehicle's keychain. See the README.md
 	// file in the root directory for pointers on setting all this up.
-	privateKey, err := protocol.LoadPrivateKey("../private.pem")
+	privateKey, err := protocol.LoadPrivateKey(keyPath)
 	if err != nil {
 		logger.Printf("Failed to load private key: %s", err)
 		return
