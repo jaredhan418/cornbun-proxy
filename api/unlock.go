@@ -13,5 +13,4 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	token := params.Get("token")
 
 	vehicle.Unlock(vin, token)
-  fmt.Fprintf(w, vin)
 }
