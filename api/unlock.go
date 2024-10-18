@@ -1,7 +1,6 @@
 package handler
  
 import (
-  "fmt"
   "net/http"
 	
 	"cornbun-proxy/vehicle"

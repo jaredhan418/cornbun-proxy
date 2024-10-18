@@ -8,5 +8,9 @@ import (
 )
  
 func Handler(w http.ResponseWriter, r *http.Request) {
-  fmt.Fprintf(w, os.Getwd())
+  pwd, err  := os.Getwd()
+	if err != nil {
+		return
+	}
+  fmt.Fprintf(w, pwd)
 }
