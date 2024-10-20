@@ -86,6 +86,4 @@ func OpenFrunk(vin string, oauthToken string, keyPath string) {
 		return
 	}
 	fmt.Println("Vehicle Frunk Open!")
-
-	status = 0
 }

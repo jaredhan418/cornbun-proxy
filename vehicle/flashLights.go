@@ -86,6 +86,4 @@ func FlashLights(vin string, oauthToken string, keyPath string) {
 		return
 	}
 	fmt.Println("Vehicle Flash light!")
-
-	status = 0
 }

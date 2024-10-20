@@ -86,6 +86,4 @@ func Lock(vin string, oauthToken string, keyPath string) {
 		return
 	}
 	fmt.Println("Vehicle locked!")
-
-	status = 0
 }
