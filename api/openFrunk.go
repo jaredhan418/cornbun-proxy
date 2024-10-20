@@ -8,7 +8,7 @@ import (
 	"cornbun-proxy/vehicle"
 )
  
-func Handler(w http.ResponseWriter, r *http.Request) {
+func OpenFrunk(w http.ResponseWriter, r *http.Request) {
   params := r.URL.Query();
 	vin := params.Get("vin")
 	token := params.Get("token")
