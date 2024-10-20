@@ -13,10 +13,6 @@ import (
 
 func Unlock(vin string, oauthToken string, keyPath string) {
 	logger := log.New(os.Stderr, "", 0)
-	status := 1 // Exit code
-	defer func() {
-		os.Exit(status)
-	}()
 
 	// Specify the user-agent header value used in HTTP requests to Tesla's servers. The default
 	// value is constructed from your package name and account.LibraryVersion.
