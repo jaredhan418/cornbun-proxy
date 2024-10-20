@@ -8,7 +8,7 @@ import (
 	"cornbun-proxy/vehicle"
 )
  
-func FlashLight(w http.ResponseWriter, r *http.Request) {
+func Lock(w http.ResponseWriter, r *http.Request) {
   params := r.URL.Query();
 	vin := params.Get("vin")
 	token := params.Get("token")
@@ -29,9 +29,9 @@ zhyqnEhyS8AhPuXrgJ0+c7I8L18M82R6lQ==
 
 	tmpFile.WriteString(privateKey)
 
-	vehicle.FlashLights(vin, token, tmpFile.Name())
+	vehicle.Lock(vin, token, tmpFile.Name())
 
-	fmt.Fprintf(w, "success flash lights")
+	fmt.Fprintf(w, "success lock")
 
 	defer tmpFile.Close()
 }

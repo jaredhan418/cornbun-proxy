@@ -31,5 +31,7 @@ zhyqnEhyS8AhPuXrgJ0+c7I8L18M82R6lQ==
 
 	vehicle.Unlock(vin, token, tmpFile.Name())
 
+	fmt.Fprintf(w, "success unlock")
+
 	defer tmpFile.Close()
 }
