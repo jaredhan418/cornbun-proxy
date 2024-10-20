@@ -11,7 +11,7 @@ import (
 	"github.com/teslamotors/vehicle-command/pkg/protocol"
 )
 
-func Unlock(vin string, oauthToken string, keyPath string) {
+func OpenFrunk(vin string, oauthToken string, keyPath string) {
 	logger := log.New(os.Stderr, "", 0)
 	status := 1 // Exit code
 	defer func() {
@@ -76,16 +76,16 @@ func Unlock(vin string, oauthToken string, keyPath string) {
 		return
 	}
 
-	fmt.Println("Unlocking car...")
-	if err := car.Unlock(ctx); err != nil {
+	fmt.Println("Open Front Trunk...")
+	if err := car.OpenFrunk(ctx); err != nil {
 		if protocol.MayHaveSucceeded(err) {
-			logger.Printf("Unlock command sent, but client could not confirm receipt: %s\n", err)
+			logger.Printf("Open Frunk command sent, but client could not confirm receipt: %s\n", err)
 		} else {
-			logger.Printf("Failed to unlock vehicle: %s\n", err)
+			logger.Printf("Failed to Open vehicle frunk: %s\n", err)
 		}
 		return
 	}
-	fmt.Println("Vehicle unlocked!")
+	fmt.Println("Vehicle Frunk Open!")
 
 	status = 0
 }

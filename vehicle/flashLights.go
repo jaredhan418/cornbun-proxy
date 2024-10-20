@@ -11,7 +11,7 @@ import (
 	"github.com/teslamotors/vehicle-command/pkg/protocol"
 )
 
-func Unlock(vin string, oauthToken string, keyPath string) {
+func FlashLights(vin string, oauthToken string, keyPath string) {
 	logger := log.New(os.Stderr, "", 0)
 	status := 1 // Exit code
 	defer func() {
@@ -76,16 +76,16 @@ func Unlock(vin string, oauthToken string, keyPath string) {
 		return
 	}
 
-	fmt.Println("Unlocking car...")
-	if err := car.Unlock(ctx); err != nil {
+	fmt.Println("Flash Lights...")
+	if err := car.FlashLights(ctx); err != nil {
 		if protocol.MayHaveSucceeded(err) {
-			logger.Printf("Unlock command sent, but client could not confirm receipt: %s\n", err)
+			logger.Printf("Flash lights command sent, but client could not confirm receipt: %s\n", err)
 		} else {
-			logger.Printf("Failed to unlock vehicle: %s\n", err)
+			logger.Printf("Failed to Flash vehicle: %s\n", err)
 		}
 		return
 	}
-	fmt.Println("Vehicle unlocked!")
+	fmt.Println("Vehicle Flash light!")
 
 	status = 0
 }
